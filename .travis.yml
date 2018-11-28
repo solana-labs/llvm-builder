@@ -13,6 +13,10 @@ before_install:
   # - cat /etc/apt/sources.list
   # - grep deb /etc/apt/sources.list | sed 's/^deb/deb-src /g' >> /etc/apt/sources.list
   # - cat /etc/apt/sources.list
+  - groups
+  - ls -la
+  - ls -la /usr/local/
+  - ls -la /sur/local/bin
   - sudo apt-get update
   - |
     sudo apt-get install -y \
@@ -44,6 +48,7 @@ before_install:
   - sudo git clone https://github.com/solana-labs/clang-tools-extra.git llvm/tools/clang/tools/extra
   - sudo git clone https://github.com/solana-labs/lld.git llvm/tools/lld
   - sudo git clone https://github.com/solana-labs/compiler-rt.git llvm/projects/compiler-rt
+  - ls -la
 
 script:
   - mkdir /llvm/build
