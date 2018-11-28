@@ -27,7 +27,7 @@ before_install:
   - sudo rm -rf /var/lib/apt/lists/*
   - wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip"
   - echo "d2fea9ff33b3ef353161ed906f260d565ca55b8ca0568fa07b1d2cab90a84a07 ninja-linux.zip" | sha256sum -c
-  - unzip ninja-linux.zip -d /usr/local/bin && \
+  - sudo unzip ninja-linux.zip -d /usr/local/bin && \
   - rm ninja-linux.zip
   - gpg --no-tty --keyserver hkp://pgp.mit.edu --recv 0x2D2CEF1034921684
   - mkdir /tmp/cmake-install && cd /tmp/cmake-install
@@ -37,7 +37,7 @@ before_install:
   - wget "https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
   - ( grep "cmake-3.7.2-Linux-x86_64.tar.gz" cmake-3.7.2-SHA-256.txt | sha256sum -c - )
   - tar xzf cmake-3.7.2-Linux-x86_64.tar.gz -C /usr/local --strip-components=1
-  - cd 
+  - cd /
   - rm -rf /tmp/cmake-install
   - git clone https://github.com/solana-labs/llvm.git
   - git clone https://github.com/solana-labs/clang.git llvm/tools/clang
