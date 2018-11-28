@@ -15,14 +15,14 @@ before_install:
   # - cat /etc/apt/sources.list
   - sudo apt-get update
   - |
-    sudo apt-get install -y
-                         --no-install-recommends
-                         ca-certificates gnupg
-                         build-essential
-                         python
-                         wget
-                         unzip
-                         git
+    sudo apt-get install -y \
+                         --no-install-recommends \
+                         ca-certificates gnupg \
+                         build-essential \
+                         python \
+                         wget \
+                         unzip \
+                         git \
                          ssh
   - rm -rf /var/lib/apt/lists/*
   - wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip"
