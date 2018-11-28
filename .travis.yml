@@ -13,11 +13,6 @@ before_install:
   # - cat /etc/apt/sources.list
   # - grep deb /etc/apt/sources.list | sed 's/^deb/deb-src /g' >> /etc/apt/sources.list
   # - cat /etc/apt/sources.list
-  - pwd
-  - groups
-  - ls -la
-  - ls -la /usr/local/
-  - ls -la /usr/local/bin
   - sudo apt-get update
   - |
     sudo apt-get install -y \
@@ -42,18 +37,16 @@ before_install:
   - wget "https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz"
   - ( grep "cmake-3.7.2-Linux-x86_64.tar.gz" cmake-3.7.2-SHA-256.txt | sha256sum -c - )
   - sudo tar xzf cmake-3.7.2-Linux-x86_64.tar.gz -C /usr/local --strip-components=1
-  - cd /
   - rm -rf /tmp/cmake-install
-  - sudo git clone https://github.com/solana-labs/llvm.git
-  - sudo git clone https://github.com/solana-labs/clang.git llvm/tools/clang
-  - sudo git clone https://github.com/solana-labs/clang-tools-extra.git llvm/tools/clang/tools/extra
-  - sudo git clone https://github.com/solana-labs/lld.git llvm/tools/lld
-  - sudo git clone https://github.com/solana-labs/compiler-rt.git llvm/projects/compiler-rt
-  - ls -la
 
 script:
-  - mkdir /llvm/build
-  - cd /llvm/build
+  - git clone https://github.com/solana-labs/llvm.git
+  - git clone https://github.com/solana-labs/clang.git llvm/tools/clang
+  - git clone https://github.com/solana-labs/clang-tools-extra.git llvm/tools/clang/tools/extra
+  - git clone https://github.com/solana-labs/lld.git llvm/tools/lld
+  - git clone https://github.com/solana-labs/compiler-rt.git llvm/projects/compiler-rt\
+  - mkdir llvm/build
+  - cd llvm/build
   - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" ..
   - ninja -j6
   - ninja install
