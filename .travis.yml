@@ -21,7 +21,9 @@ install:
                          wget \
                          unzip \
                          git \
-                         ssh
+                         ssh \
+                         clang \
+                         llvm
   - sudo rm -rf /var/lib/apt/lists/*
   - wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-linux.zip"
   - echo "d2fea9ff33b3ef353161ed906f260d565ca55b8ca0568fa07b1d2cab90a84a07 ninja-linux.zip" | sha256sum -c
@@ -43,12 +45,13 @@ script:
   - git clone https://github.com/solana-labs/llvm.git
   - git clone https://github.com/solana-labs/clang.git llvm/tools/clang
   - git clone https://github.com/solana-labs/clang-tools-extra.git llvm/tools/clang/tools/extra
-  - git clone https://github.com/solana-labs/lld.git llvm/tools/lld
-  - git clone https://github.com/solana-labs/compiler-rt.git llvm/projects/compiler-rt\
+  - git clone https://github.com/solana-labs/compiler-rt.git llvm/projects/compiler-rt
+  # - git clone https://github.com/solana-labs/lld.git llvm/tools/lld
   - mkdir llvm/build
   - cd llvm/build
-  - cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" ..
-  - ninja -j6
+  # - cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" ..
+  - CXX=clang++ CC=clang cmake -DCMAKE_BUILD_TYPE=Debug -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_USE_LINKER=gold -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" ..
+  - ninja -j6 clang
   - ninja install
   - ls root/local/bin
 
