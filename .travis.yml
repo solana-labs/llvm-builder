@@ -50,10 +50,10 @@ script:
   - mkdir llvm/build
   - cd llvm/build
   # - cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" ..
-  - CXX=clang++ CC=clang cmake -DCMAKE_BUILD_TYPE=Debug -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_USE_LINKER=gold -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" ..
-  - ninja -j6 clang
-  - ninja install
-  - ls root/local/bin
+  - CXX=clang++ CC=clang cmake -DCMAKE_BUILD_TYPE=Debug -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_USE_LINKER=gold -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" ..
+  - ninja -j2 clang
+  # - ninja install
+  - ls /root/local/bin
 
 before_deploy:
   - rm -rf deploy
