@@ -4,7 +4,7 @@ set -ex
 cd "$(dirname "$0")"
 
 docker build -t solanalabs/llvm .
-# docker push solanalabs/llvm
+docker push solanalabs/llvm
 
 rm -rf out
 mkdir -p out

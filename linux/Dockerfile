@@ -75,4 +75,4 @@ FROM launcher.gcr.io/google/debian8:latest
 LABEL maintainer "Solana Maintainers"
 COPY --from=builder llvm/version.md /usr/local
 COPY --from=builder llvm/build/bin /usr/local/bin
-COPY --from=builder llvm/build/lib/clang /usr/local/lib
+COPY --from=builder llvm/build/lib/clang /usr/local/lib/clang
