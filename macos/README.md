@@ -10,8 +10,10 @@ Builds natively on MacOS
 
 To install cmake and ninja you can use https://brew.sh
 
+```bash
 brew update
 brew install cmake
 brew install ninja
+```
 
 

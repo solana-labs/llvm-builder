@@ -51,10 +51,16 @@ RUN mkdir /tmp/cmake-install && cd /tmp/cmake-install && \
 
 # Checkout the source code 
 RUN git clone https://github.com/solana-labs/llvm.git && \
+    echo "$( cd llvm && git rev-parse HEAD )  https://github.com/solana-labs/llvm.git" >> version.txt
     git clone https://github.com/solana-labs/clang.git llvm/tools/clang && \
+    echo "$( cd llvm/tools/clang && git rev-parse HEAD )  https://github.com/solana-labs/clang.git" >> version.txt
     git clone https://github.com/solana-labs/clang-tools-extra.git llvm/tools/clang/tools/extra  && \
+    echo "$( cd llvm/tools/clang/tools/extra && git rev-parse HEAD )  https://github.com/solana-labs/clang-tools-extra.git" >> version.txt
     git clone https://github.com/solana-labs/compiler-rt.git llvm/projects/compiler-rt && \
+    echo "$( cd llvm/projects/compiler-rt && git rev-parse HEAD )  https://github.com/solana-labs/compiler-rt.git" >> version.txt
     git clone https://github.com/solana-labs/lld.git llvm/tools/lld
+    echo "$( cd llvm/tools/lld && git rev-parse HEAD )  https://github.com/solana-labs/lld.git" >> version.txt
+
 
 RUN mkdir /llvm/build && \
     cd /llvm/build && \
@@ -67,5 +73,6 @@ RUN mkdir /llvm/build && \
 # Produce stage 2 docker with just the peices needed
 FROM launcher.gcr.io/google/debian8:latest
 LABEL maintainer "Solana Maintainers"
+COPY --from=builder llvm/version.md /usr/local
 COPY --from=builder llvm/build/bin /usr/local/bin
 COPY --from=builder llvm/build/lib/clang /usr/local/lib
