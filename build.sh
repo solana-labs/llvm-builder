@@ -4,8 +4,8 @@ set -ex
 rm -rf deploy
 mkdir -p deploy
 
-(cd ubuntu && ./build.sh )
-cp ubuntu/out/solana-llvm-ubuntu.tgz deploy
+(cd linux && ./build.sh )
+cp linux/out/solana-llvm-linux.tgz deploy
 
 if [ "$(uname)" == "Darwin" ]; then
   (cd macos && ./build.sh )
