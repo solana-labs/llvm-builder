@@ -43,4 +43,4 @@ mkdir -p deploy/lib
 cp version.md deploy
 cp -rf llvm/build/bin deploy
 cp -rf llvm/build/lib/clang deploy/lib
-tar -C deploy -zcf solana-llvm-macos.tgz .
+tar -C deploy -jcf solana-llvm-macos.tar.bz2 .

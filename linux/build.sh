@@ -4,7 +4,6 @@ set -ex
 cd "$(dirname "$0")"
 
 docker build -t solanalabs/llvm .
-docker push solanalabs/llvm
 
 rm -rf out
 mkdir -p out
@@ -17,5 +16,6 @@ docker cp "$id":/usr/local/version.md deploy
 docker cp "$id":/usr/local/bin deploy
 docker cp "$id":/usr/local/lib deploy
 docker rm -v "$id"
-tar -C deploy -zcf solana-llvm-linux.tgz .
+tar -C deploy -jcf solana-llvm-linux.tar.bz2 .
 
+docker push solanalabs/llvm
