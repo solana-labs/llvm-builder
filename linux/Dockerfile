@@ -64,7 +64,12 @@ RUN git clone https://github.com/solana-labs/llvm.git && \
 
 RUN mkdir /llvm/build && \
     cd /llvm/build && \
-    cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_USE_LINKER=gold -DCMAKE_INSTALL_PREFIX=$HOME/local -G "Ninja" .. && \
+    cmake -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+          -DLLVM_USE_LINKER=gold \
+          -DCMAKE_INSTALL_PREFIX=$HOME/local \
+          -G "Ninja" \
+          .. && \
     ninja -j6 llvm-objdump && \
     ninja -j6 lld && \
     ninja -j6 llc && \

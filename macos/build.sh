@@ -20,18 +20,7 @@ echo "$( cd llvm/tools/lld && git rev-parse HEAD )  https://github.com/solana-la
 
 mkdir -p llvm/build
 pushd llvm/build
-cmake -DCMAKE_BUILD_TYPE="MinSizeRel" \
-      -DLLVM_TARGETS_TO_BUILD=BPF \
-      -DLLVM_BUILD_LLVM_DYLIB=ON \
-      -DLLVM_ENABLE_LIBCXX=ON \
-      -DLLVM_BUILD_TOOLS=OFF \
-      -DLLVM_INCLUDE_EXAMPLES=OFF \
-      -DLLVM_INCLUDE_TESTS=OFF \
-      -DLLVM_INCLUDE_BENCHMARKS=OFF \
-      -DLLVM_ENABLE_LIBPFM=OFF \
-      -DLLVM_ENABLE_ZLIB=OFF \
-      -DLLVM_ENABLE_DIA_SDK=OFF \
-      -G "Ninja" ..
+cmake -DCMAKE_BUILD_TYPE="Release" -DCMAKE_EXPORT_COMPILE_COMMANDS=ON -G "Ninja" ..
 ninja -j6 llvm-objdump
 ninja -j6 lld
 ninja -j6 llc
