@@ -49,7 +49,7 @@ RUN mkdir /tmp/cmake-install && cd /tmp/cmake-install && \
 # ADD checksums /tmp/checksums
 # ADD scripts /tmp/scripts
 
-# Checkout the source code 
+# Checkout the source code
 RUN git clone https://github.com/solana-labs/llvm.git && \
     echo "$( cd llvm && git rev-parse HEAD )  https://github.com/solana-labs/llvm.git" >> version.md && \
     git clone https://github.com/solana-labs/clang.git llvm/tools/clang && \
@@ -70,10 +70,10 @@ RUN mkdir /llvm/build && \
           -DCMAKE_INSTALL_PREFIX=$HOME/local \
           -G "Ninja" \
           .. && \
-    ninja -j6 llvm-objdump && \
-    ninja -j6 lld && \
-    ninja -j6 llc && \
-    ninja -j6 clang
+    ninja llvm-objdump && \
+    ninja lld && \
+    ninja llc && \
+    ninja clang
 
 # Produce stage 2 docker with just the peices needed
 FROM launcher.gcr.io/google/debian8:latest
@@ -81,3 +81,8 @@ LABEL maintainer "Solana Maintainers"
 COPY --from=builder version.md /usr/local
 COPY --from=builder llvm/build/bin /usr/local/bin
 COPY --from=builder llvm/build/lib/clang /usr/local/lib/clang
+
+# Install ld
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends build-essential && \
+    rm -rf /var/lib/apt/lists/*

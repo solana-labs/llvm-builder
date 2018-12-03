@@ -29,5 +29,5 @@ This repo depends on the following:
 
 Any changes that need to go into an LLVM release must be made in the appropriate repos listed above.
 
-* See `ubuntu/Dockerfile` for an example of how to sync and build for Linux
+* See `linux/Dockerfile` for an example of how to sync and build for Linux
 * See `macos/build.sh` for an example of how to sync and build for MacOS
