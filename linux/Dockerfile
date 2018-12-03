@@ -70,10 +70,10 @@ RUN mkdir /llvm/build && \
           -DCMAKE_INSTALL_PREFIX=$HOME/local \
           -G "Ninja" \
           .. && \
-    ninja -j6 llvm-objdump && \
-    ninja -j6 lld && \
-    ninja -j6 llc && \
-    ninja -j6 clang
+    ninja llvm-objdump && \
+    ninja lld && \
+    ninja llc && \
+    ninja clang
 
 # Produce stage 2 docker with just the peices needed
 FROM launcher.gcr.io/google/debian8:latest
