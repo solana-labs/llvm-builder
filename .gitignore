@@ -1,5 +1,5 @@
 deploy
-macos/out
+osx/out
 linux/out
 
 .DS_Store
