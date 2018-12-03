@@ -84,5 +84,5 @@ COPY --from=builder llvm/build/lib/clang /usr/local/lib/clang
 
 # Install ld
 RUN apt-get update && \
-    apt-get install -y --no-install-recommends binutils && \
+    apt-get install -y --no-install-recommends build-essential && \
     rm -rf /var/lib/apt/lists/*
