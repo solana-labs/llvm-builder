@@ -3,7 +3,7 @@ set -ex
 
 cd "$(dirname "$0")"
 
-docker build -t solanalabs/llvm .
+docker build --no-cache -t solanalabs/llvm .
 
 rm -rf out
 mkdir -p out

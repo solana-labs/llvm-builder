@@ -72,7 +72,8 @@ RUN mkdir /llvm/build && \
     ninja llvm-objdump && \
     ninja lld && \
     ninja llc && \
-    ninja clang
+    ninja clang && \
+    ninja llvm-objdump
 
 # Produce stage 2 docker with just the peices needed
 FROM launcher.gcr.io/google/debian8:latest
