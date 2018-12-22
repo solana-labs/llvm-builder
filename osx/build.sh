@@ -22,7 +22,7 @@ mkdir -p llvm/build
 pushd llvm/build
 cmake -DCMAKE_BUILD_TYPE="Release" -G "Ninja" ..
 ninja llvm-objdump
-ninja llvm-objdump
+ninja llvm-objcopy
 ninja lld
 ninja llc
 ninja clang
