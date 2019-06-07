@@ -31,14 +31,14 @@ RUN wget "https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-li
     rm ninja-linux.zip
 
 # Import public key required for verifying signature of cmake download.
-RUN gpg --no-tty --keyserver hkp://pgp.mit.edu --recv 0x2D2CEF1034921684
+#RUN gpg --no-tty --keyserver hkp://pgp.mit.edu:80 --recv 0x2D2CEF1034921684
 
 # Download, verify and install cmake version that can compile clang into /usr/local.
 # (Version in debian8 repos is too old)
 RUN mkdir /tmp/cmake-install && cd /tmp/cmake-install && \
     wget "https://cmake.org/files/v3.7/cmake-3.7.2-SHA-256.txt.asc" && \
     wget "https://cmake.org/files/v3.7/cmake-3.7.2-SHA-256.txt" && \
-    gpg --verify cmake-3.7.2-SHA-256.txt.asc cmake-3.7.2-SHA-256.txt && \
+    #gpg --verify cmake-3.7.2-SHA-256.txt.asc cmake-3.7.2-SHA-256.txt && \
     wget "https://cmake.org/files/v3.7/cmake-3.7.2-Linux-x86_64.tar.gz" && \
     ( grep "cmake-3.7.2-Linux-x86_64.tar.gz" cmake-3.7.2-SHA-256.txt | \
       sha256sum -c - ) && \
@@ -69,12 +69,12 @@ RUN mkdir /llvm/build && \
           -DCMAKE_INSTALL_PREFIX=$HOME/local \
           -G "Ninja" \
           .. && \
-    ninja llvm-objdump && \
-    ninja llvm-objcopy && \
-    ninja lld && \
+    ninja llvm-ar && \
+    ninja clang && \
     ninja llc && \
-    ninja clang
-    
+    ninja lld && \
+    ninja llvm-objcopy && \
+    ninja llvm-objdump
 
 # Produce stage 2 docker with just the peices needed
 FROM launcher.gcr.io/google/debian8:latest

@@ -21,11 +21,13 @@ echo "$( cd llvm/tools/lld && git rev-parse HEAD )  https://github.com/solana-la
 mkdir -p llvm/build
 pushd llvm/build
 cmake -DCMAKE_BUILD_TYPE="Release" -G "Ninja" ..
-ninja llvm-objdump
-ninja llvm-objcopy
-ninja lld
-ninja llc
+ninja llvm-ar
 ninja clang
+ninja llc
+ninja lld
+ninja llvm-objcopy
+ninja llvm-objdump
+
 popd
 
 rm -rf deploy
