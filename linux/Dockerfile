@@ -1,7 +1,7 @@
 # This docker file is based on the llvm docker file example located here:
 # https://github.com/llvm-mirror/llvm/blob/master/utils/docker/debian8/Dockerfile
 
-FROM launcher.gcr.io/google/debian8:latest as builder
+FROM launcher.gcr.io/google/debian9:latest as builder
 LABEL maintainer "Solana Maintainers"
 
 # Install build dependencies of llvm.
@@ -77,7 +77,7 @@ RUN mkdir /llvm/build && \
     ninja llvm-objdump
 
 # Produce stage 2 docker with just the peices needed
-FROM launcher.gcr.io/google/debian8:latest
+FROM launcher.gcr.io/google/debian9:latest
 LABEL maintainer "Solana Maintainers"
 COPY --from=builder version.md /usr/local
 COPY --from=builder llvm/build/bin /usr/local/bin
